@@ -12,8 +12,8 @@ class AffiliatesRequest extends FormRequest
             'affiliates_file' => [
                 'required',
                 'file',
-                'mimetypes:application/x-ndjson',
-                'max:20480'
+                'mimetypes:application/x-ndjson,application/json',
+                'max:10240'
             ]
         ];
     }

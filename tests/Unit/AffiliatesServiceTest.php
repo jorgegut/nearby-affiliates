@@ -30,6 +30,7 @@ class AffiliatesServiceTest extends TestCase
         $results = $service->getNearbyAffiliates($fakeFile, 100);
 
         $this->assertCount(1, $results);
-        $this->assertEquals(1, $results[0]['id']);
+
+        $this->assertEquals([1 => 'Jonh Doe'], $results);
     }
 }

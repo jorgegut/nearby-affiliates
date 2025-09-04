@@ -12,7 +12,7 @@ class AffiliatesController extends Controller
     public function __construct(private AffiliatesService $affiliatesService) {}
 
     public function index() {
-        return view('affiliates');
+        return view('index');
     }
 
     public function process(AffiliatesRequest $request) {

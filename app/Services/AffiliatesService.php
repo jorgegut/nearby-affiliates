@@ -25,12 +25,12 @@ class AffiliatesService implements AffiliatesServiceInterface
             );
 
             if ($distance <= $maxDistance) {
-                $nearby[] = [
-                    'id' => $affiliate['affiliate_id'],
-                    'name' => $affiliate['name']
-                ];
+                $nearby[$affiliate['affiliate_id']] = $affiliate['name'];
             }
         }
+
+        // Sorts Affiliates by Id Ascending
+        ksort($nearby);
 
         return $nearby;
     }

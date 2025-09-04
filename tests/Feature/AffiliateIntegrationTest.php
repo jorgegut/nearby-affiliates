@@ -16,8 +16,8 @@ class AffiliateIntegrationTest extends TestCase
         Storage::fake('local');
 
         $ndjson = <<<NDJSON
-{"affiliate_id": 1, "name": "Affiliate A", "latitude": 53.339428, "longitude": -6.257664}
 {"affiliate_id": 2, "name": "Affiliate B", "latitude": 52.986375, "longitude": -6.043701}
+{"affiliate_id": 1, "name": "Affiliate A", "latitude": 53.339428, "longitude": -6.257664}
 {"affiliate_id": 3, "name": "Affiliate C", "latitude": 51.92893, "longitude": -10.27699}
 NDJSON;
 
@@ -32,16 +32,20 @@ NDJSON;
             true
         );
 
-        $response = $this->post('/', [
+        $response = $this->post('/results', [
             'affiliates_file' => $file
         ]);
 
         $response->assertStatus(200);
         $response->assertViewIs('affiliates');
         $response->assertViewHas('results', function ($results) {
-            return count($results) === 2 &&
-                $results[0]['id'] === 1 &&
-                $results[1]['id'] === 2;
+
+            $expectedResult = [
+                1 => 'Affiliate A',
+                2 => 'Affiliate B'
+            ];
+
+            return $results === $expectedResult;
         });
     }
 }

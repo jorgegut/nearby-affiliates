@@ -14,5 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+
+        $exceptions->render(function (\Illuminate\Http\Exceptions\PostTooLargeException $e, $request) {
+            return response()->view('errors.file-too-large', [], 413);
+        });
+
     })->create();
